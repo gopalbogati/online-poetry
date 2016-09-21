@@ -151,7 +151,7 @@
                                        class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ Auth::logout()}}"
+                                    <a href=" {{--{{Auth::logout()}}--}}"
                                        class="btn btn-default btn-flat">Logout</a>
                                 </div>
                             </li>
