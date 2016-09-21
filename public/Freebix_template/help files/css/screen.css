@@ -1,0 +1,112 @@
+/****************************** MAIN STYLES - backgorund,deviders ******************************/
+/* Main Container */
+img, embed, object, video {
+	max-width: 100%
+}
+/* Deviders */
+div.boxsep {
+	height: 4px;
+	background:#fdf2e4;
+	border-left:20px solid #f9efe3;
+	display: block;
+	margin: 20px 0;
+}
+div.blankSeparator {
+	height: 1px;
+	margin:20px 0;
+	display: block;
+}
+/****************************** HOME - Content Part - Logo&Menu ******************************/
+
+/* Header - Logo & Menu */
+.contentheader {
+	background:#261b0d url(../images/rausch.png) repeat;
+	margin-top:0px;
+	border-bottom:1px solid #1d1b18;
+}
+.logo {
+	padding-top:20px;
+}
+/****************************** HOME - Content Part - Breadcrumbs & Socials ******************************/
+.titlepart {
+	float:right;
+	margin-top:20px;
+	font-weight:bold;
+}
+.titlepart ul {
+	color:#f9efe3;
+}
+p.thanks {
+	font-size:15px;
+	font-style:italic;
+	font-weight:bold;
+	margin-top:20px;
+	text-align:center;
+}
+/****************************** HOME - Content Part - Box One ******************************/
+.homecontent {
+	background:white;
+	padding:0px 0 20px 0;
+}
+.homecontent h3 {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+h2.header {
+	text-align:center;
+	font-weight:normal;
+}
+span.color {
+	color:#543d1f;
+	background:#f9efe3 url(../images/rausch.png) repeat;
+	padding:5px;
+	font-weight:bold;
+}
+pre {
+	color:#543d1f;
+}
+.credits a {
+	color:#543d1f;
+}
+.homecontent h2.header {
+	background:#f9efe3 url(../images/rausch.png) repeat;
+	padding:5px;
+}
+/* Content Shortcodes */
+.one_half {
+	width: 48%;
+}
+.one_third {
+	width: 30.66%;
+}
+.two_third {
+	width: 65.33%;
+}
+.one_fourth {
+	width: 22%;
+}
+.one_fifth {
+	width: 16.8%;
+}
+.one_sixth {
+	width: 15%;
+}
+.one_half, .one_third, .two_third, .one_fourth, .one_fifth {
+	margin-right: 4%;
+	margin-bottom: 10px;
+	float: left;
+}
+.one_sixth {
+	margin-right: 2%;
+	margin-bottom:20px;
+	float: left;
+}
+.lastcolumn {
+	margin-right: 0!important;
+	clear: right;
+}
+/* #Page Styles
+================================================== */
+.content.right {
+	float: right;
+}
