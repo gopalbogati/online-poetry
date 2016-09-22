@@ -9,7 +9,6 @@ use Socialite;
 class FacebookController extends Controller
 {
 
-
     /**
      * Redirect the user to the facebook authentication page.
      *

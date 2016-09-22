@@ -155,4 +155,5 @@ class PostController extends Controller
 
         return view('Posts.single', compact('post', 'categories'));
     }
+
 }
