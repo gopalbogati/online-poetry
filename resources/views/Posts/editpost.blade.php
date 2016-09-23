@@ -50,7 +50,7 @@
                                                                 <img src="{{ Image::Url(asset('/uploads/posts/'.$post->image),100,100) }}"
                                                                      alt="{{ $post->name }}" class="img-thumbnail"/>
                                                             @else
-                                                                <img src="{{ asset('asset/images/no_image.png') }}"
+                                                                <img src="{{ asset('uploads/Noimage/no.png') }}" alt="">
                                                                      alt="">
                                                             @endif
                                                         </td>

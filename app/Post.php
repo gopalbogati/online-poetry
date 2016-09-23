@@ -35,7 +35,7 @@ class Post extends Model
         return $this->belongsTo('App\Category');
     }
 
-    public function getMoreAttribute($content, $word_limit = 30)
+    public function getMoreAttribute($content, $word_limit = 50)
     {
 
         $content = $this->content;

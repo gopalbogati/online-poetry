@@ -26,16 +26,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        /* $request->validate($request, [
-             'title' => 'required|unique:posts|max:255',
-             'date' => 'required',
-             'category' => 'required',
-             'content' => 'required',
-             'editor' => 'required',
-             // 'image' => 'required|mim',
-
-
-         ]);*/
 
         $input = $request->all();
         $file = $request->file('image');
@@ -64,12 +54,48 @@ class PostController extends Controller
 
     }
 
-    function lists()
+    function welcomePostStore(Request $request)
     {
-        $posts = Post::orderBy('title')->paginate('10');
+
+        $input = $request->all();
+        $file = $request->file('image');
+
+        if ($request->hasFile('image')) {
+
+            $imageName = $file->getClientOriginalName();
+            $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
+            $file->move(public_path() . '/uploads/posts', $fileName);
+            $input['image'] = $fileName;
+
+
+        } else {
+
+            $input['image'] = '';
+        }
+
+
+        if (Post::create($input)) {
+
+            return redirect()->route('welcomepostdisplay');
+        }
+    }
+
+    public function welcomePostDisplay()
+    {
+        $categories = Category::all();
+        $posts = Post::orderBy('date','desc')->paginate('6');
 
 
         //dd($posts->toArray());
+        return view('welcome', compact('posts', 'categories'));
+
+    }
+
+
+    function lists()
+    {
+        $posts = Post::orderBy('date','desc')->paginate('6');
+       //dd($posts->toArray());
 
         return view('Posts.list', ["posts" => $posts]);
     }
@@ -98,14 +124,14 @@ class PostController extends Controller
     function postUpdate(Request $request, Post $post)
     {
 
-        $input=$request->all();
+        $input = $request->all();
 
         $file = $request->file('image');
         if ($request->hasFile('image')) {
 
             $imageName = $file->getClientOriginalName();
             $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
-            $file->move(public_path() . '/uploads', $fileName);
+            $file->move(public_path() . '/uploads/posts/', $fileName);
             $input['image'] = $fileName;
         } else {
             $input['image'] = $input['old_image'];

@@ -10,10 +10,19 @@
 <div class="header">
     <div class="header_top">
         <div class="wrap">
+
             <div class="logo">
                 <a href="{{route('welcome.user')}}">{{--<img src="{{asset('blog-master-web/images/logo.png')}}" alt=""/>--}}
                     <b style="font-size: 100px;color: #00a65a">Online-Poetry</b></a>
             </div>
+            @if( Auth::check() )
+                <div class="login_button">
+                    <ul>
+                <li><a href="{{ route('logout') }}" class="btn btn-info">Logout</a></li>
+                <li>Logged In as: {{ Auth::user()->name }}</li>
+                        </ul>
+                    </div>
+            @else
             <div class="login_button">
                 <ul>
                     <li><a href="{{route('register.user')}}">Register here</a>
@@ -21,6 +30,7 @@
                     <li><a href="{{route('user.login')}}">Login</a></li>
 
                 </ul>
+                    @endif
             </div>
             <div class="clear"></div>
         </div>
@@ -78,8 +88,7 @@
             <h3>We're Social</h3>
             <div class="img_list">
                 <ul>
-                    <li><img src="{{asset('blog-master-web/images/facebook.png')}}" alt=""/><a href="#">Facebook</a>
-                    </li>
+                    <li><img src="{{asset('blog-master-web/images/facebook.png')}}" alt=""/><a href="#">Facebook</a></li>
                     <li><img src="{{asset('blog-master-web/images/flickr.png')}}" alt=""/><a href="#">Flickr</a></li>
                     <li><img src="{{asset('blog-master-web/images/google.png')}}" alt=""/><a href="#">Google</a></li>
                     <li><img src="{{asset('blog-master-web/images/yahoo.png')}}" alt=""/><a href="#">Yahoo</a></li>

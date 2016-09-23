@@ -95,7 +95,9 @@
                                         <!-- The progress bar -->
                                         <div class="progress xs">
                                             <!-- Change the css width attribute to simulate progress -->
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                                 role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                 aria-valuemax="100">
                                                 <span class="sr-only">20% {{ trans('adminlte_lang::message.complete') }}</span>
                                             </div>
                                         </div>
@@ -111,8 +113,9 @@
                 @if (Auth::guest())
                     <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
                     <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
-                @else
-                    <!-- User Account Menu -->
+            @else
+
+                <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -124,7 +127,7 @@
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{asset('/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+                                <img src="{{asset('/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image"/>
                                 <p>
                                     {{ Auth::user()->name }}
                                     <small>{{ trans('adminlte_lang::message.login') }} Nov. 2012</small>
@@ -145,17 +148,22 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
+                                    <a href="#"
+                                       class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
                                 </div>
+
                                 <div class="pull-right">
-                                    <a href="{{Auth::logout}}" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.signout') }}</a>
+                                    @if( Auth::check() )
+                                        <a href="{{ route('logout') }}"
+                                           class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.signout') }}</a>
+                                    @endif
                                 </div>
                             </li>
                         </ul>
                     </li>
-                @endif
+            @endif
 
-                <!-- Control Sidebar Toggle Button -->
+            <!-- Control Sidebar Toggle Button -->
                 <li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                 </li>

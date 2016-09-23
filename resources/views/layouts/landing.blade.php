@@ -2,14 +2,86 @@
 @section('content')
     <div class="wrap">
         <div class="main">
-
+            <div id="google_translate_element"></div><script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                }
+            </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
             <div class="content">
-
+             {{--   @if( Auth::check() )
+                    <a href="{{ route('logout') }}" class="btn btn-info">Logout</a>
+                    Logged In as: {{ Auth::user()->name }}
+                @endif--}}
                 <div class="box1">
 
+                    <div class="container spark-screen">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                    </div>
+                                    <div class="register-box-body">
+
+                                        @if (Auth::check())
+                                            Logged In as: {{ Auth::user()->name }}
+                                            <li class="active"><a href="{{ url('home') }}">Go to dashboard</a></li>
+                                        <h1>Create Post</h1>
+                                            <form action="{{route('welcomepoststore')}}" class="form" method="post" enctype="multipart/form-data">
+                                            {{csrf_field()}}
+
+                                            <label for="readonly">Editor</label><br>
+                                            <input name="editor" value="{{ Auth::user()->name }}" readonly>
+                                            <span class="text-danger">{{ $errors->first('editor') }}</span>
+
+
+                                            <div class="form-group">
+                                                <label>Post image:</label>
+                                                <input type="file" name="image">
+                                                <span class="text-danger">{{ $errors->first('image') }}</span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Title</label>
+                                                <input type=" text" class="form-control" name="title" required>
+                                            </div>
+                                            <span class="text-danger">{{ $errors->first('title') }}</span>
+                                            <div class="form-group">
+                                                <label for="readonly">Date</label>
+                                                <input type="readonly" class="form-control" value="{{
+                                 date('Y-m-d ,h:i:sa')}}" name="date" readonly/>
+                                            </div>
+
+                                            <div>
+                                                <label for="">Select Category</label>
+                                                <select class="form-control" name="category_id">
+                                                    @foreach( $categories as $category )
+                                                        <option value="{{ $category->id}}">{{ $category->alias }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Details </label>
+                                                <textarea rows="7" cols="80" class="form-control" name="content" required></textarea>
+                                            </div>
+                                            <span class="text-danger">{{ $errors->first('content') }}</span>
+                                            <div class="form-group"><label for=""></label>
+                                                <button type="text" class="btn btn-info">Create Post</button>
+                                            </div>
+                                        </form>
+                                        @endif
+                                    </div><!-- /.form-box -->
+                                </div><!-- /.register-box -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="box1">
                     @foreach($posts as $post)
                         <h2><a href="{{route('post.single',$post->id)}}">{{$post->title}}</a></h2>
-                        <span>{{$post->date}}Postby:{{$post->editor}}</span>
+                        {{$post->date}}<br>
+                    <span>Postby:{{$post->editor}}</span>
                         <div class="box1_img">
 
                             @if($post->image)
@@ -35,8 +107,6 @@
                     <div class="page_numbers">
                         <ul>
                             <li><a href="#">{{ $posts->links()}}</a>
-
-
                         </ul>
                     </div>
                     <div class="clear"></div>
@@ -57,15 +127,16 @@
                                         ({{count($category->post)}})</a>
                                 </li>
                                 <!-- aside-section -->
-
                             </ul>
                         @endforeach
                     </div>
                 </div>
 
                 <div class="side_bottom">
-                    <h2>Sign in to post</h2>
                     <div class="list">
+                        @if (Auth::check())
+                        @else
+                        <h2>Sign in to post</h2>
                         <body class="hold-transition login-page">
                         <div class="login-box">
                             <div class="login-logo">
@@ -137,11 +208,10 @@
                             });
                         </script>
                         </body>
+                            @endif
                     </div>
                 </div>
             </div>
-
-
             <div class="clear"></div>
         </div>
     </div>

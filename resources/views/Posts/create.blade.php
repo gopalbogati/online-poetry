@@ -30,7 +30,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Title</label>
-                                <input type=" text" class="form-control" name="title">
+                                <input type=" text" class="form-control" name="title" required>
                             </div>
                             <span class="text-danger">{{ $errors->first('title') }}</span>
                             <div class="form-group">
@@ -39,11 +39,6 @@
                                  date('Y-m-d ,h:i:sa')}}"
                                        name="date" readonly/>
                             </div>
-                            {{--<div class="form-group">
-                                <label for="">Category</label>
-                                <input type="text" class="form-control" name="category">
-                            </div>
-                            <span class="text-danger">{{ $errors->first('category') }}</span>--}}
                             <div>
                                 <label for="">Select Category</label>
                                 <select class="form-control" name="category_id">
@@ -54,8 +49,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Details </label>
-                                <textarea rows="7" cols="80" class="form-control" name="content">
-</textarea>
+                                <textarea rows="7" cols="80" class="form-control" name="content" required></textarea>
                             </div>
                             <span class="text-danger">{{ $errors->first('content') }}</span>
                             <div class="form-group"><label for=""></label>

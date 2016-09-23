@@ -63,13 +63,15 @@
 
                                 <tr>
                                     <td>{{$post->editor}}</td>
+
                                     <td>{{$post->id}}</td>
+
                                     <td>
                                         @if($post->image)
                                             <img src="{{ Image::Url(asset('/uploads/posts/'.$post->image),300,300) }}"
                                                  alt="{{ $post->name }}" class="img-thumbnail"/>
                                         @else
-                                            <img src="{{ asset('asset/images/no_image.png') }}" alt="">
+                                            <img src="{{ asset('uploads/Noimage/no.png') }}" alt="">
                                         @endif
                                     </td>
                                     </td>

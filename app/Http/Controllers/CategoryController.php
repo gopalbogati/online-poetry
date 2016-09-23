@@ -78,7 +78,6 @@ class CategoryController extends Controller
     function updateDetails(Request $request, Category $category)
     {
 
-
         $input = $request->all();
         $file = $request->file('image');
         if ($request->hasFile('image')) {
@@ -109,24 +108,22 @@ class CategoryController extends Controller
 
     }
 
-    function logout()
-    {
-
-        Auth::logout();
-
-        return redirect()->route('login');
-    }
-
     function WelcomeCategoryLists()
     {
         $categories = Category::all();
         // dd(count($categories));
 
-        $posts = Post::orderBy('title')->paginate('4');
+        $posts = Post::orderBy('date', 'desc')->paginate('6');
 
 
         return view('welcome', compact('categories', 'posts'));
     }
 
+    function logout()
+    {
+        Auth::logout();
+
+        return redirect()->route('welcome.user');
+    }
 
 }

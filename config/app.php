@@ -186,7 +186,14 @@ return [
         /*Laravel collective 5.3 html files*/
         Collective\Html\HtmlServiceProvider::class,
         //social lite facebook provider
-        Laravel\Socialite\SocialiteServiceProvider::class
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+         /*
+         * Flash
+         * https://github.com/laracasts/flash
+         * */
+        Laracasts\Flash\FlashServiceProvider::class,
+
 
     ],
 
@@ -245,7 +252,12 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         //social lite alias facebook
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        /*
+         * Flash
+         * https://github.com/caffeinated/flash
+         * */
+        'Flash' => Laracasts\Flash\Flash::class,
 
 
     ],

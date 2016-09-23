@@ -11,8 +11,8 @@ use App\Http\Requests;
 use App\User;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
-
 use Session;
+
 
 class UserController extends Controller
 {
