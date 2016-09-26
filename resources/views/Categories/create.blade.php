@@ -15,7 +15,7 @@
                     </div>
                     <div class="register-box-body">
                         <form action="{{route('category.store')}}" class="form" method="post"
-                              enctype="multipart/form-data">
+                              enctype="multipart/form-data" novalidate>
                             {{csrf_field()}}
 
                             <div class="form-group">
@@ -40,7 +40,7 @@
                             </div>
                             <span class="text-danger">{{ $errors->first('details') }}</span>
                             <div class="form-group"><label for=""></label>
-                                <button type="text" class="btn btn-info">Save</button>
+                                <button type="submit" class="btn btn-info">Save</button>
                             </div>
 
                         </form>

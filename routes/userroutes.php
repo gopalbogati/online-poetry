@@ -18,6 +18,7 @@ Route::group(
         Route::post('update/{post}', 'PostController@postUpdate')->name('post.update');
         Route::get('users/list', 'UserController@index')->name('userlist');
         Route::get('users/{usertable}', 'UserController@deleteUserDetails')->name('deleteuser');
+        Route::delete('users', ['as' => 'user.destroy', 'uses' => 'UserController@destroy']);
 
     });
 }

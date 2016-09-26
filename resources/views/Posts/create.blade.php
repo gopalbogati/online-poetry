@@ -15,7 +15,7 @@
                     </div>
                     <div class="register-box-body">
 
-                        <form action="{{route('poststore')}}" class="form" method="post" enctype="multipart/form-data">
+                        <form action="{{route('poststore')}}" class="form" method="post" enctype="multipart/form-data" novalidate>
                             {{csrf_field()}}
 
                             <label for="readonly">Editor</label><br>
@@ -53,7 +53,7 @@
                             </div>
                             <span class="text-danger">{{ $errors->first('content') }}</span>
                             <div class="form-group"><label for=""></label>
-                                <button type="text" class="btn btn-info">Create Post</button>
+                                <button type="submit" class="btn btn-info">Create Post</button>
                             </div>
 
                         </form>

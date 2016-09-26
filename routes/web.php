@@ -28,7 +28,6 @@ Route::get('post/search', 'PostController@search')->name('post.search');
 /*Route::resource('demo', 'DemoController');*/
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Roles
@@ -54,7 +53,6 @@ Route::put('role/{id}', ['as' => 'role.update', 'uses' => 'RoleController@update
 Route::delete('role', ['as' => 'role.destroy', 'uses' => 'RoleController@destroy']);
 
 
-
 // INDEX
 Route::get('permission', ['as' => 'permission.index', 'uses' => 'PermissionController@index']);
 
@@ -63,14 +61,44 @@ Route::get('permission/create', ['as' => 'permission.create', 'uses' => 'Permiss
 Route::post('permission', ['as' => 'permission.store', 'uses' => 'PermissionController@store']);
 
 // SHOW
-Route::get('permission/{id}', ['as' => 'permission.show', 'uses' => 'PermissionController@show'])->where('id', '[0-9]+');
+Route::get('permission/{id}', ['as' => 'permission.show', 'uses' => 'PermissionController@show'])->where('id',
+    '[0-9]+');
 
 // EDIT | UPDATE
-Route::get('permission/{id}/edit', ['as' => 'permission.edit', 'uses' => 'PermissionController@edit'])->where('id', '[0-9]+');
-Route::put('permission/{id}', ['as' => 'permission.update', 'uses' => 'PermissionController@update'])->where('id', '[0-9]+');
+Route::get('permission/{id}/edit', ['as' => 'permission.edit', 'uses' => 'PermissionController@edit'])->where('id',
+    '[0-9]+');
+Route::put('permission/{id}', ['as' => 'permission.update', 'uses' => 'PermissionController@update'])->where('id',
+    '[0-9]+');
 
 // DELETE
 Route::delete('permission', ['as' => 'permission.destroy', 'uses' => 'PermissionController@destroy']);
 
 
+/*
+|--------------------------------------------------------------------------
+| User Group
+|--------------------------------------------------------------------------
+|
+*/
 
+// INDEX
+Route::get('user', ['as' => 'user.group.index', 'uses' => 'UserGroupController@index']);
+
+// CREATE | STORE
+Route::get('user/create', ['as' => 'user.group.create', 'uses' => 'UserGroupController@create']);
+Route::post('user', ['as' => 'user.group.store', 'uses' => 'UserGroupController@store']);
+
+// SHOW
+Route::get('user/{id}', ['as' => 'user.group.show', 'uses' => 'UserGroupController@show'])->where('id', '[0-9]+');
+
+// EDIT | UPDATE
+Route::get('user/{id}/edit', ['as' => 'user.group.edit', 'uses' => 'UserGroupController@edit'])->where('id', '[0-9]+');
+Route::put('user/{id}', ['as' => 'user.group.update', 'uses' => 'UserGroupController@update'])->where('id', '[0-9]+');
+
+// DELETE
+Route::delete('user', ['as' => 'user.group.destroy', 'uses' => 'UserGroupController@destroy']);
+
+
+Route::get('standalone-filemanager/{filed_id}/{type?}',
+    ['as' => 'standalone-filemanager', 'uses' => 'FilemanagerController@standalone']);
+Route::post('upload/image', ['as' => 'uploadImage', 'uses' => 'FilemanagerController@uploadImage']);

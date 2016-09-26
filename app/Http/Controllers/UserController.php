@@ -2,20 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\User;
 use App\Http\Requests\UserFormRequest;
 use App\Post;
 use App\Role;
 use Illuminate\Http\Request;
+use App\Repositories\UserRepository;
 use App\Http\Requests;
-use App\User;
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Laracasts\Flash\Flash;
+
 
 
 class UserController extends Controller
 {
+
+    protected $user;
+
+    public function __construct(UserRepository $user)
+    {
+
+        $this->user = $user;
+    }
 
 
     function index()
@@ -26,12 +36,20 @@ class UserController extends Controller
     }
 
 
-
     function loginUser()
     {
+
         return view('auth.login', compact('role'));
 
 
+    }
+    function loginCheck(Request $requests){
+        if (Auth::attempt(['email' => $requests['email'], 'password' => $requests['password']])) {
+            // return redirect('dashboard');
+            Session::flash('success', 'Welcome to Admin Dashboard');
+            return redirect()->url('home') ;
+        } else
+            return redirect()->back();
     }
 
     function registerUser()
@@ -75,4 +93,30 @@ class UserController extends Controller
         }
     }
 
+    public function destroy(Request $request)
+    {
+        $ids = $request->all();
+
+
+        try {
+
+            if ($request->has('toDelete')) {
+
+                $this->user->delete($ids['toDelete']);
+
+
+                Session::flash('success', 'The information is successfully deleted ');
+            } else {
+                Session::flash('success', 'Please check at least one to delete');
+
+            }
+
+
+        } catch (Exception $e) {
+
+            Flash::error($e->getMessage());
+        }
+
+        return redirect()->back();
+    }
 }

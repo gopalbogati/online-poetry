@@ -30,6 +30,7 @@ class User extends Authenticatable
         'date',
         'auth_token',
         'facebook_id',
+        'user_field',
 
     ];
 

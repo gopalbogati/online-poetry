@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('Users.layouts.auth')
 
 @section('htmlheader_title')
     Register here
@@ -9,7 +9,7 @@
     <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="{{ url('/home') }}"><b>Users Account</a>
+            <a href="{{ url('/home') }}"><b>Users Account</b></a>
         </div>
 
         @if (count($errors) > 0)
@@ -73,13 +73,17 @@
                     <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
 
+
+                <div class="form-group">
+         <textarea name='body' class="form-control">
+
+         </textarea>
+                </div>
                 <button type="submit"
                         class="btn btn-primary btn-block btn-flat">Create new account
                 </button>
                 <!-- /.col -->
-
             </form>
-
 
             <a href="{{route('user.login')}}"
                class="text-center"> Redirect to login if already register</a>
@@ -87,18 +91,29 @@
     </div><!-- /.register-box -->
 
     @include('layouts.partials.scripts_auth')
-
     @include('auth.terms')
 
-    <script>
-        $(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional
-            });
-        });
-    </script>
+
     </body>
 
+   {{-- tiny mce init--}}
+<script type="text/javascript">
+
+    tinymce.init({
+        selector: "textarea",
+        resize: "both",
+        relative_urls: false,
+        plugins: ["autoresize", "image", "code", "lists", "code","example", "link"],
+        indentation : '20pt',
+        file_browser_callback: function(field_name, url, type, win) {
+            if (type == 'image') $('#my_form input').click();
+        },
+        image_list: "/imglist",
+        toolbar: [
+            "undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright | preview | spellchecker"
+        ]
+
+    });
+
+</script>
 @endsection

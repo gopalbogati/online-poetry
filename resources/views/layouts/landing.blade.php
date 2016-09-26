@@ -26,7 +26,7 @@
                                             Logged In as: {{ Auth::user()->name }}
                                             <li class="active"><a href="{{ url('home') }}">Go to dashboard</a></li>
                                         <h1>Create Post</h1>
-                                            <form action="{{route('welcomepoststore')}}" class="form" method="post" enctype="multipart/form-data">
+                                            <form action="{{route('welcomepoststore')}}" class="form" method="post" enctype="multipart/form-data" novalidate>
                                             {{csrf_field()}}
 
                                             <label for="readonly">Editor</label><br>
@@ -64,7 +64,7 @@
                                             </div>
                                             <span class="text-danger">{{ $errors->first('content') }}</span>
                                             <div class="form-group"><label for=""></label>
-                                                <button type="text" class="btn btn-info">Create Post</button>
+                                                <button type="submit" class="btn btn-info">Create Post</button>
                                             </div>
                                         </form>
                                         @endif
@@ -88,7 +88,7 @@
                                 <img src="{{ Image::Url(asset('/uploads/posts/'.$post->image),300,300) }}"
                                      alt="{{ $post->name }}" class="img-thumbnail"/>
                             @else
-                                <img src="{{ asset('asset/images/no_image.png') }}" alt="">
+                                <img src="{{ asset('uploads/Noimage/no.png') }}" alt="">
                             @endif
 
                         </div>

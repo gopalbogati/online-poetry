@@ -25,16 +25,20 @@ namespace App\Http\Controllers {
          */
         public function index(Request $request)
         {
+
             $query  = $request->get('q');
             $order  = $request->get('sort','desc');
             $by     = $request->get('by','id');
 
+
             $permissions = $this->permissionRepo->getAll($query,$order,$by);
+
             $permissions->appends(['q' => $query,'sort'=>$order,'by'=>$by]);
 
             $sort = ($order=='desc')?'asc':'desc';
 
-            return View('user::permission.index', compact('permissions','sort'));
+
+            return View('permission.index', compact('permissions','sort'));
         }
 
         /**
@@ -44,7 +48,7 @@ namespace App\Http\Controllers {
          */
         public function create()
         {
-            return View('user::permission.create');
+            return View('permission.create');
         }
 
         /**
@@ -68,7 +72,7 @@ namespace App\Http\Controllers {
                 echo $e->getFile();
             }
 
-            return View('user::permission.create');
+            return View('permission.create');
 
         }
 
@@ -82,7 +86,7 @@ namespace App\Http\Controllers {
         {
             $permission = $this->permissionRepo->find($id);
 
-            return View('user::permission.show',compact('permission'));
+            return View('permission.show',compact('permission'));
         }
 
         /**
@@ -94,7 +98,7 @@ namespace App\Http\Controllers {
         public function edit($id)
         {
             $permission = $this->permissionRepo->find($id);
-            return View('user::permission.edit', compact('permission'));
+            return View('permission.edit', compact('permission'));
         }
 
         /**

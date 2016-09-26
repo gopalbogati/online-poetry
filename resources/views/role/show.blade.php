@@ -1,5 +1,5 @@
-@extends('role.layout')
-@section('content')
+@extends('layouts.app')
+@section('main-content')
 
     <div class="row">
             {{--<h3 class="page-header">Vacancy Announcement</h3>--}}

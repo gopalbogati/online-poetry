@@ -2,7 +2,10 @@
 <html>
 <head>
     <title>Online poetry</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    {{--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+  {{--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
+
     <link href="{{asset('blog-master-web/css/style.css')}}" rel="stylesheet" type="text/css" media="all"/>
     <link href='http://fonts.googleapis.com/css?family=Monda' rel='stylesheet' type='text/css'>
 </head>
@@ -104,5 +107,30 @@
 <div class="f_bottom">
 
 </div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="{{ asset('/asset/vendor/tinymce/tinymce.min.js') }}"
+        type="text/javascript"></script>
+<script src="{{ asset('/asset/js/custom-admin.js') }}" type="text/javascript"></script>
+{{-- tiny mce init--}}
+<script type="text/javascript">
+
+    tinymce.init({
+        selector: "textarea",
+        resize: "both",
+        relative_urls: false,
+        plugins: ["autoresize", "image", "code", "lists", "code","example", "link"],
+        indentation : '20pt',
+        file_browser_callback: function(field_name, url, type, win) {
+            if (type == 'image') $('#my_form input').click();
+        },
+        image_list: "/imglist",
+        toolbar: [
+            "undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright | preview | spellchecker"
+        ]
+
+    });
+
+</script>
+
 </body>
 </html>

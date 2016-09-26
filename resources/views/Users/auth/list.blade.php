@@ -18,6 +18,8 @@
                         List users
                     </div>
                     <div>
+                        {!! Form::open(['route' => 'user.destroy','method'=>'DELETE','id'=>'formDelete']) !!}
+
                         <table class="table -align-justify">
                             <tr class="table-bordered">
                                 <th>
@@ -46,6 +48,21 @@
                                 </th>
 
 
+                                <th width="15px">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="checkAll">
+                                        </label>
+                                    </div>
+                                </th>
+                                <th>
+                                    <button type="button" class="btn btn-xs btn-danger btn-flat"
+                                            onclick="confirmAndSubmit()">
+                                        <i class="fa fa-trash-o">
+                                        </i>&nbsp;Delete
+                                    </button>
+                                </th>
+
                             </tr>
 
                             @foreach($usertables as $usertable)
@@ -59,10 +76,16 @@
                                     <td>{{$usertable->date}}</td>
                                     <td>{{$usertable->url}}</td>
 
+
                                     <td>
 
                                         <a href="{{ route('deleteuser', $usertable->id) }}"
                                            onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
+                                    </td>
+                                    <td class="checkbox">
+                                        <label>
+                                            {!! Form::checkbox('toDelete[]',$usertable->id, false,['class'=>'checkItem']) !!}
+                                        </label>
                                     </td>
 
 
@@ -71,6 +94,7 @@
                             @endforeach
                         </table>
                         {{$usertables->links()}}
+                        {!! Form::close() !!}
                     </div><!-- /.register-box -->
                 </div>
             </div>

@@ -1,6 +1,6 @@
-@extends('role.layout')
+@extends('layouts.app')
 
-@section('content')
+@section('main-content')
     <div class="row">
             {{--<h3 class="page-header">Vacancy Announcement</h3>--}}
             <div class="row">
@@ -19,7 +19,7 @@
                                <div class="col-lg-11">
                                      @include('flash::message')
                                      {!! Form::model($role,['method'=>'PUT','route'=>['role.update',$role->id],'class'=>'form-horizontal','role'=>'form']) !!}
-                                        @include('user::role.partials.form',['submitButtonText'=>'Update'])
+                                        @include('role.partials.form',['submitButtonText'=>'Update'])
                                      {!! Form::close() !!}
                                </div>
                                <!-- /.col-lg-6 (nested) -->

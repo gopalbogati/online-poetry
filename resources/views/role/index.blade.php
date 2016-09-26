@@ -1,6 +1,7 @@
-@extends('role.layout')
 
-@section('content')
+@extends('layouts.app')
+
+@section('main-content')
 
     <div class="row">
             <h3 class="page-header">Role Management</h3>
