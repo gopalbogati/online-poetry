@@ -51,7 +51,7 @@
                                                                      alt="{{ $post->name }}" class="img-thumbnail"/>
                                                             @else
                                                                 <img src="{{ asset('uploads/Noimage/no.png') }}" alt="">
-                                                                     alt="">
+
                                                             @endif
                                                         </td>
                                                     </div>

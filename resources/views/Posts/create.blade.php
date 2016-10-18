@@ -22,6 +22,10 @@
                             <input name="editor" value="{{ Auth::user()->name }}" readonly>
                             <span class="text-danger">{{ $errors->first('editor') }}</span>
 
+                            <div class="form-group">
+                                <label for=""></label>
+                                <input type="hidden" class="form-control" name="user_id" value="{{Auth::user()->id}}" required>
+                            </div>
 
                             <div class="form-group">
                                 <label>Post image:</label>

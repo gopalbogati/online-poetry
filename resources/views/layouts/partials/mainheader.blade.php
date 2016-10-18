@@ -6,7 +6,16 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>Admin {{--{{Auth::user()->email}}--}}</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>{{--{{$facebookUser->getName()}}--}}{{--{{Auth::user()->email}}--}}Admin</b></span>
+        <span class="logo-lg"><b>@if (Auth::User()->hasRole('Admin'))
+
+            {{'Admin dashboard'}}
+
+            </b></span>
+            <span class="logo-lg">
+            </span>
+            @endhasrole
+
+
     </a>
 
     <!-- Header Navbar -->

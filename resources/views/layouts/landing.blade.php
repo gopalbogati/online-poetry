@@ -13,7 +13,6 @@
                     Logged In as: {{ Auth::user()->name }}
                 @endif--}}
                 <div class="box1">
-
                     <div class="container spark-screen">
                         <div class="row">
                             <div class="col-md-10 col-md-offset-1">
@@ -93,7 +92,7 @@
 
                         </div>
                         <div class="data">
-                            <p>{{$post->more}}</p>
+                            <p>{!! $post->more !!}</p>
                             <a href="{{route('post.single',$post->id)}}">Continue reading</a>
                         </div>
                         <div class="clear"></div>

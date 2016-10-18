@@ -12,6 +12,7 @@ use  App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Spatie\Permission\Models\Role;
 
 class PostController extends Controller
 {
@@ -20,6 +21,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
+
+        /*    return view('Posts.create', compact('categories'))->middleware(['RoleCheck']);*/
 
         return view('Posts.create', compact('categories'));
     }
@@ -83,7 +86,7 @@ class PostController extends Controller
     public function welcomePostDisplay()
     {
         $categories = Category::all();
-        $posts = Post::orderBy('date','desc')->paginate('6');
+        $posts = Post::orderBy('date', 'desc')->paginate('6');
 
 
         //dd($posts->toArray());
@@ -92,12 +95,36 @@ class PostController extends Controller
     }
 
 
-    function lists()
+    function lists(User $user, Request $request)
     {
-        $posts = Post::orderBy('date','desc')->paginate('6');
-       //dd($posts->toArray());
+        if (Auth::User()->hasRole('Admin')) {
+            $posts = Post::orderBy('date', 'desc')->paginate('2');
 
-        return view('Posts.list', ["posts" => $posts]);
+            //dd($posts->toArray());
+            return view('Posts.list', ["posts" => $posts]);
+        } else {
+            $post = User::find(Auth::User()->id);
+
+            $posts=$post->post;
+/*
+            $user=User::all()->find('13');
+
+            $posts = Post::orderBy('date', 'desc')->get();
+          dd($posts->user);*/
+
+          /*  return view('Posts.list', compact('posts', 'post'));*/
+
+
+
+            return view('Posts.list', ["posts" => $posts]);
+            //dd($post);
+            /*if ($post == true) {
+                return view('Posts.singlelist', ["post" => $post]);
+            } else {
+                return redirect()->back();
+            }*/
+
+        }
     }
 
     function postDelete(Post $post)

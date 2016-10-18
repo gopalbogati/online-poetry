@@ -26,7 +26,7 @@
         type="text/javascript"></script>
 <script src="{{ asset('/asset/js/custom-admin.js') }}" type="text/javascript"></script>
 {
-<script type="text/javascript">
+{{--<script type="text/javascript">
 
     tinymce.init({
         selector: "textarea",
@@ -44,7 +44,7 @@
 
     });
 
-</script>
+</script>--}}
 
 
 

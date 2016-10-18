@@ -18,7 +18,7 @@
                         List users
                     </div>
                     <div>
-                        {!! Form::open(['route' => 'user.destroy','method'=>'DELETE','id'=>'formDelete']) !!}
+                        {!!Form::open(['route' => 'user.destroy','method'=>'DELETE','id'=>'formDelete'])!!}
 
                         <table class="table -align-justify">
                             <tr class="table-bordered">
@@ -43,6 +43,7 @@
                                 <th>
                                     URL
                                 </th>
+                                @if (Auth::User()->hasRole('Admin')) {
                                 <th>
                                     Action
                                 </th>
@@ -55,6 +56,7 @@
                                         </label>
                                     </div>
                                 </th>
+
                                 <th>
                                     <button type="button" class="btn btn-xs btn-danger btn-flat"
                                             onclick="confirmAndSubmit()">
@@ -62,6 +64,7 @@
                                         </i>&nbsp;Delete
                                     </button>
                                 </th>
+                                @endhasrole
 
                             </tr>
 
@@ -76,18 +79,19 @@
                                     <td>{{$usertable->date}}</td>
                                     <td>{{$usertable->url}}</td>
 
-
+                                    @if (Auth::User()->hasRole('Admin')) {
                                     <td>
 
                                         <a href="{{ route('deleteuser', $usertable->id) }}"
                                            onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
+
                                     </td>
                                     <td class="checkbox">
                                         <label>
                                             {!! Form::checkbox('toDelete[]',$usertable->id, false,['class'=>'checkItem']) !!}
                                         </label>
                                     </td>
-
+                                    @endhasrole
 
                                 </tr>
 

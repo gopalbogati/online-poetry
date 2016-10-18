@@ -1,4 +1,4 @@
-@extends('layouts.includes.front')
+`@extends('layouts.includes.front')
 @section('content')
     <div class="wrap">
         <div class="main">

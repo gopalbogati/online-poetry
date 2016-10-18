@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class HomeController
@@ -34,6 +35,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+       /* $data['user']= Auth::user()->roles()->pluck('name');*/
+
         return view('home');
     }
 

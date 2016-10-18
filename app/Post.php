@@ -14,6 +14,7 @@ class Post extends Model
         'content',
         'image',
         'editor',
+        'user_id',
 
     ];
 
@@ -44,6 +45,11 @@ class Post extends Model
         return implode(" ", array_splice($words, 0, $word_limit));
         //  echo excerpts($content);
 
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
 }

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\User;
 use App\UserTable;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryFormRequest;
@@ -19,105 +20,115 @@ class CategoryController extends Controller
 
     function create()
     {
-        $categories = Category::all();
+        if (Auth::User()->hasRole('Admin')) {
+            $categories = Category::all();
 
-        return view('Categories.create', compact('categories'));
+            return view('Categories.create', compact('categories'));
 
-
+        }
     }
 
     function storeCategory(CategoryFormRequest $request)
     {
-        $input = $request->all();
-        $file = $request->file('image');
-        if ($request->hasFile('image')) {
-            $imageName = $file->getClientOriginalName();
-            $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
-            $file->move(public_path() . '/uploads', $fileName);
-            $input['image'] = $fileName;
-        } else {
-            $input['image'] = '';
-        }
+        if (Auth::User()->hasRole('Admin')) {
+            $input = $request->all();
+            $file = $request->file('image');
+            if ($request->hasFile('image')) {
+                $imageName = $file->getClientOriginalName();
+                $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
+                $file->move(public_path() . '/uploads', $fileName);
+                $input['image'] = $fileName;
+            } else {
+                $input['image'] = '';
+            }
 
 
-        if (Category::create($input)) {
-            Session::flash('success', 'The information is successfully saved ');
+            if (Category::create($input)) {
+                Session::flash('success', 'The information is successfully saved ');
 
-            return redirect()->route('categorylist');
+                return redirect()->route('categorylist');
+            }
         }
     }
 
     function listCategory()
     {
-        $categories = Category::orderBy('name')->paginate(7);
+        if (Auth::User()->hasRole('Admin')) {
+            $categories = Category::orderBy('name')->paginate(7);
 
-        return view('Categories.categorylist', ['categories' => $categories]);
-
+            return view('Categories.categorylist', ['categories' => $categories]);
+        }
     }
 
     function editDetails(Category $category)
     {
-        return view('categories.categoryedit', ['category' => $category]);
+        if (Auth::User()->hasRole('Admin')) {
+            return view('categories.categoryedit', ['category' => $category]);
 
+        }
     }
 
     public function deleteDetails($category)
     {
-        $categories = Category::findOrFail($category);
+        if (Auth::User()->hasRole('Admin')) {
+            $categories = Category::findOrFail($category);
 
-        if ($categories->delete()) {
+            if ($categories->delete()) {
 
-            Session::flash('flash_message', 'The category successfully deleted!');
+                Session::flash('flash_message', 'The category successfully deleted!');
 
-            return redirect()->back();
+                return redirect()->back();
 
+            }
         }
-
     }
 
     function updateDetails(Request $request, Category $category)
     {
+        if (Auth::User()->hasRole('Admin')) {
+            $input = $request->all();
+            $file = $request->file('image');
+            if ($request->hasFile('image')) {
+                $imageName = $file->getClientOriginalName();
+                $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
+                $file->move(public_path() . '/uploads', $fileName);
+                $input['image'] = $fileName;
+            } else {
+                $input['image'] = $input['old_image'];
+            }
 
-        $input = $request->all();
-        $file = $request->file('image');
-        if ($request->hasFile('image')) {
-            $imageName = $file->getClientOriginalName();
-            $fileName = date('Y-m-d-h-i-s') . '-' . preg_replace('[ ]', '-', $imageName);
-            $file->move(public_path() . '/uploads', $fileName);
-            $input['image'] = $fileName;
-        } else {
-            $input['image'] = $input['old_image'];
+            $category->update($input);
+            Session::flash('flash_message', 'The category successfully updated!');
+
+            return redirect()->route('categorylist');
+
+
         }
-
-        $category->update($input);
-        Session::flash('flash_message', 'The category successfully updated!');
-
-        return redirect()->route('categorylist');
-
-
     }
 
     function search(Request $request)
     {
+        if (Auth::User()->hasRole('Admin')) {
+            $query = $request->get('q');
+            $categories = Category::where('name', 'like', "%$query%")->orderBy('name', 'asc')->paginate(3);
 
-        $query = $request->get('q');
-        $categories = Category::where('name', 'like', "%$query%")->orderBy('name', 'asc')->paginate(3);
-
-        return view('Categories.categorylist', ['categories' => $categories]);
-        // DB::table('citizens')->count();
-
+            return view('Categories.categorylist', ['categories' => $categories]);
+            // DB::table('citizens')->count();
+        }
     }
 
     function WelcomeCategoryLists()
     {
-        $categories = Category::all();
-        // dd(count($categories));
 
-        $posts = Post::orderBy('date', 'desc')->paginate('6');
+            $categories = Category::all();
+            // dd(count($categories));
+
+            $posts = Post::orderBy('date', 'desc')->paginate('6');
 
 
-        return view('welcome', compact('categories', 'posts'));
-    }
+            return view('welcome', compact('categories', 'posts'));
+        }
+
 
     function logout()
     {

@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Session;
 use Laracasts\Flash\Flash;
 
 
-
 class UserController extends Controller
 {
 
@@ -30,9 +29,14 @@ class UserController extends Controller
 
     function index()
     {
-        $usertables = User::orderBy('name')->paginate(7);
+        if (Auth::User()->hasRole('Admin')) {
+            $usertables = User::orderBy('name')->paginate(7);
 
-        return view('Users.auth.list', ['usertables' => $usertables]);
+            return view('Users.auth.list', ['usertables' => $usertables]);
+        } else {
+
+            return view('errors.404');
+        }
     }
 
 
@@ -43,13 +47,17 @@ class UserController extends Controller
 
 
     }
-    function loginCheck(Request $requests){
+
+    function loginCheck(Request $requests)
+    {
         if (Auth::attempt(['email' => $requests['email'], 'password' => $requests['password']])) {
             // return redirect('dashboard');
             Session::flash('success', 'Welcome to Admin Dashboard');
-            return redirect()->url('home') ;
-        } else
+
+            return redirect()->url('home');
+        } else {
             return redirect()->back();
+        }
     }
 
     function registerUser()
@@ -81,6 +89,7 @@ class UserController extends Controller
 
     function deleteUserDetails($id)
     {
+        //  if(Auth::User()->hasRole('Admin')){
 
         $user = User::find($id);
 
@@ -91,32 +100,39 @@ class UserController extends Controller
             return redirect()->back();
 
         }
+
+        //}
+
     }
 
     public function destroy(Request $request)
     {
-        $ids = $request->all();
+        if (Auth::User()->hasRole('Admin')) {
+            $ids = $request->all();
 
 
-        try {
+            try {
 
-            if ($request->has('toDelete')) {
+                if ($request->has('toDelete')) {
 
-                $this->user->delete($ids['toDelete']);
+                    $this->user->delete($ids['toDelete']);
 
 
-                Session::flash('success', 'The information is successfully deleted ');
-            } else {
-                Session::flash('success', 'Please check at least one to delete');
+                    Session::flash('success', 'The information is successfully deleted ');
+                } else {
+                    Session::flash('success', 'Please check at least one to delete');
 
+                }
+
+
+            } catch (Exception $e) {
+
+                Flash::error($e->getMessage());
             }
 
-
-        } catch (Exception $e) {
-
-            Flash::error($e->getMessage());
+            return redirect()->back();
+        } else {
+            return view('errors.404');
         }
-
-        return redirect()->back();
     }
 }

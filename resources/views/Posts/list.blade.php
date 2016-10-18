@@ -65,7 +65,6 @@
                                     <td>{{$post->editor}}</td>
 
                                     <td>{{$post->id}}</td>
-
                                     <td>
                                         @if($post->image)
                                             <img src="{{ Image::Url(asset('/uploads/posts/'.$post->image),300,300) }}"
@@ -81,11 +80,28 @@
                                     <td>{{$post->category->name}}</td>
                                     <td>{{$post->content}}</td>
 
-                                    <td>
-                                        <a href="{{route('post.edit', $post->id) }}">EDIT</a>
+                                    <td>{{--$user->hasPermissionTo('edit articles');--}}
+                                        @if (Auth::User()->hasPermissionTo('view post','edit post','delete post'))
 
-                                        <a href="{{ route('post.delete', $post->id) }}"
-                                           onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
+                                            <a href="{{route('post.edit', $post->id) }}">EDIT</a>
+                                            {{-- @endif
+                                             @if (Auth::User()->hasPermissionTo('delete post'))--}}
+                                            <a href="{{ route('post.delete', $post->id) }}"
+                                               onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
+
+                                        @elseif( (Auth::User()->hasPermissionTo('delete post')))
+
+                                            {{-- @endif
+                                             @if (Auth::User()->hasPermissionTo('delete post'))--}}
+                                            <a href="{{ route('post.delete', $post->id) }}"
+                                               onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
+                                        @elseif( (Auth::User()->hasPermissionTo('edit post')))
+
+                                            {{-- @endif
+                                             @if (Auth::User()->hasPermissionTo('delete post'))--}}
+                                            <a href="{{ route('post.delete', $post->id) }}"
+                                               onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a>
+                                        @endif
 
 
                                     </td>
@@ -96,9 +112,10 @@
                         </table>
 
                     </div><!-- /.form-box -->
-
-                    {{--//for pagination--}}
-                   {{$posts->links()}}
+                    @if (Auth::User()->hasRole('Admin'))
+                        {{--//for pagination--}}
+                        {{$posts->links()}}
+                    @endif
                 </div><!-- /.register-box -->
             </div>
         </div>

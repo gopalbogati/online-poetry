@@ -40,14 +40,18 @@
                     page</a>
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i>
                     <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
+            @if (Auth::User()->hasRole('Admin')) {
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Categories</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
+
                     <li><a href="{{ route('categorycreate') }}">Create category</a></li>
                     <li><a href="{{ route('categorylist') }}">List categories</a></li>
+
                 </ul>
             </li>
+
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Users</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
@@ -55,6 +59,8 @@
                     <li><a href="{{ route('userlist') }}">List Users</a></li>
                 </ul>
             </li>
+            @endhasrole
+            @if (Auth::User()->hasRole('Admin')) {
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Posts</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
@@ -65,20 +71,34 @@
                     <li><a href="{{ route('postLists') }}">List posts</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>Setting</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ route('user.group.index') }}">Users</a></li>
-                </ul>
-                <ul class="treeview-menu">
-                    <li><a href="{{ route('role.index') }}">Roles</a></li>
-                </ul>
-                <ul class="treeview-menu">
-                    <li><a href="{{ route('permission.index') }}">Permissions</a></li>
-                </ul>
+            @else
+                <li class="treeview">
+                    <a href="#"><i class='fa fa-link'></i> <span>Posts</span> <i
+                                class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('postcreate') }}">Create post</a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('postLists')}}">List details</a></li>
+                    </ul>
+                </li>
+                @endhasrole
+                @if (Auth::User()->hasRole('Admin')) {
+                <li class="treeview">
+                    <a href="#"><i class='fa fa-link'></i> <span>Setting</span> <i
+                                class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('user.group.index') }}">Users</a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('role.index') }}">Roles</a></li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('permission.index') }}">Permissions</a></li>
+                    </ul>
 
-            </li>
+                </li>
+                @endhasrole
 
         </ul><!-- /.sidebar-menu -->
     </section>

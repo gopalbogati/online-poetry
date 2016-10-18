@@ -13,6 +13,7 @@ Route::group(
         Route::post('post', 'PostController@welcomePostStore')->name('welcomepoststore');
         Route::get('postslist', 'PostController@welcomePostDisplay')->name('welcomepostdisplay');
         Route::get('display/posts', 'PostController@lists')->name('postLists');
+        Route::get('display/post', 'PostController@p')->name('postuser');
         Route::get('delete/{post}', 'PostController@postDelete')->name('post.delete');
         Route::get('edit/{post}', 'PostController@postEdit')->name('post.edit');
         Route::post('update/{post}', 'PostController@postUpdate')->name('post.update');

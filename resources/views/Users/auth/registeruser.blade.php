@@ -96,24 +96,4 @@
 
     </body>
 
-   {{-- tiny mce init--}}
-<script type="text/javascript">
-
-    tinymce.init({
-        selector: "textarea",
-        resize: "both",
-        relative_urls: false,
-        plugins: ["autoresize", "image", "code", "lists", "code","example", "link"],
-        indentation : '20pt',
-        file_browser_callback: function(field_name, url, type, win) {
-            if (type == 'image') $('#my_form input').click();
-        },
-        image_list: "/imglist",
-        toolbar: [
-            "undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright | preview | spellchecker"
-        ]
-
-    });
-
-</script>
 @endsection
