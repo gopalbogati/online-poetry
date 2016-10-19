@@ -35,7 +35,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Details </label>
-                                <textarea rows="6" cols="50" class="form-control" name="details" placeholder="Enter details here">
+                                <textarea rows="6" cols="50" class="form-control" name="details"
+                                          placeholder="Enter details here">
 </textarea>
                             </div>
                             <span class="text-danger">{{ $errors->first('details') }}</span>

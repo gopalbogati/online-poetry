@@ -4,17 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
-
     protected $fillable = [
-        'title',
-        'date',
-        'category_id',
-        'content',
-        'image',
-        'editor',
-        'user_id',
+        'name',
+        'email',
+        'website',
+        'comment',
+        'post_id',
 
     ];
 
@@ -51,11 +48,7 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
-    /**
-     * Get the comments for the blog post.
-     */
-    public function comment()
-    {
-        return $this->hasMany('App\Comment');
+    public function post(){
+        return $this->belongsTo('App\Post');
     }
 }

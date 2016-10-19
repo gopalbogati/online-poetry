@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Role;
+use App\Comment;
 
 class PostController extends Controller
 {
@@ -205,8 +206,10 @@ class PostController extends Controller
     public function single(Post $post)
     {
         $categories = Category::all();
-
-        return view('Posts.single', compact('post', 'categories'));
+        $post = Post::find($post->id);
+        $posts=$post->comment;
+      //  dd($posts);
+        return view('Posts.single', compact('post','posts' ,'categories'));
     }
 
 }

@@ -60,10 +60,8 @@
 
                             </tr>
                             @foreach($posts as $post)
-
                                 <tr>
                                     <td>{{$post->editor}}</td>
-
                                     <td>{{$post->id}}</td>
                                     <td>
                                         @if($post->image)
