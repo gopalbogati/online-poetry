@@ -4,7 +4,7 @@
         <div class="main">
             <div class="content">
                 <div class="box1">
-                    <h2><a href="single.html"></a></h2>
+
                     <p>{{$post->title}}</p>
                     <div class="top_img">
                         @if($post->image)
@@ -18,11 +18,12 @@
                         <p>{{$post->content}}</p>
 
                     </div>
+
                 </div>
 
 
-                <div class="lev">
-                    <div class="leave">
+                <div>
+                    <div>
                         <h4>Leave a comment</h4>
                     </div>@if (Auth::guest())
                         <a href="{{route('register.user')}}">Register to comments here</a><br>
@@ -65,32 +66,30 @@
                     </div>
                 </div>
                 <br>
-                <div class="comments-main">
+            </div>
+            <div class="sidebar">
+                <div class="sidetop">
+                    <b>Comments List</b>
                     <br>
-                    <span class="cmnts-right">Comments List</span>
                     <br>
-                    <div class="col-md-10 cmts-main-right">
+                    @foreach($posts as $post)
 
-                        @foreach($posts as $post)
-                            <h5>{{ Auth::guest()?'':$post->name }}</h5>
+                        <h5>{{ Auth::guest()?'':$post->name }}</h5>
+                        <p>{!! $post->comment!!}</p>
 
-                            <p>{!! $post->comment !!}</p>
-                            <div class="cmts">
-                                <div class="cmnts-left">
-                                    <p>{{$post->created_at}}</p>
-                                </div>
-                                <br>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                    </div>
-                    <div class="clearfix"></div>
-                    @endforeach
-                    <div class="clearfix"></div>
+                     {{--   <p><a href="{{ route('post.delete', $post->comment->id) }}"
+                              onclick="return confirm('Are you sure you want to delete this item?');">DELETE</a></p>--}}
+                        <p>{{$post->created_at}}</p>
+                        <br>
                 </div>
 
+                @endforeach
             </div>
-            <div class="clear"></div>
         </div>
+    </div>
+
+    <div class="clear"></div>
+
+    </div>
     </div>
 @stop

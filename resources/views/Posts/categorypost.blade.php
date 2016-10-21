@@ -20,7 +20,7 @@
                         <div class="data_desc">
                             <p>{{$post->more}}</p>
 
-                            <a href="{{route('post.single',$post->id)}}">Continue reading >>></a>
+                            <a href="{{route('post.single',$post->id)}}">Continue reading</a>
                         </div>
                     </div>
                 @endforeach

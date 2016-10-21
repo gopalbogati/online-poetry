@@ -106,15 +106,14 @@ class PostController extends Controller
         } else {
             $post = User::find(Auth::User()->id);
 
-            $posts=$post->post;
-/*
-            $user=User::all()->find('13');
+            $posts = $post->post;
+            /*
+                        $user=User::all()->find('13');
 
-            $posts = Post::orderBy('date', 'desc')->get();
-          dd($posts->user);*/
+                        $posts = Post::orderBy('date', 'desc')->get();
+                      dd($posts->user);*/
 
-          /*  return view('Posts.list', compact('posts', 'post'));*/
-
+            /*  return view('Posts.list', compact('posts', 'post'));*/
 
 
             return view('Posts.list', ["posts" => $posts]);
@@ -200,16 +199,14 @@ class PostController extends Controller
 
         return view('welcome', compact('categories', 'posts'));
 
-
     }
 
-    public function single(Post $post)
+    public function single(Post $post, Comment $comment)
     {
         $categories = Category::all();
         $post = Post::find($post->id);
-        $posts=$post->comment;
-      //  dd($posts);
-        return view('Posts.single', compact('post','posts' ,'categories'));
+        $posts = $post->comment;
+        return view('Posts.single', compact('post', 'posts', 'categories'));
     }
 
 }
