@@ -5,9 +5,8 @@
             <div class="content">
                 <div class="box1">
                     <p>{{$post->title}}</p>
-                    @if(Auth::user())
+
                     <p>@include('laravelLikeComment::like', ['like_item_id' => 'image_31'])</p>
-                    @endif
                    {{-- @if(Auth::guest())
                         <span><b>Total likes:</b>{{$post->likeCount}}</span>
                     @elseif($post->liked())
@@ -19,6 +18,7 @@
                         <br>
                     @endif--}}
                     <div class="top_img">
+                        <!-- Go to www.addthis.com/dashboard to customize your tools --> <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515ec5315b840f45"></script>
                         @if($post->image)
                             <img src="{{ Image::Url(asset('/uploads/posts/'.$post->image),100,100) }}"
                                  alt="{{ $post->name }}" class="img-thumbnail"/>

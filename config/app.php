@@ -196,7 +196,8 @@ return [
         /*laravel likeable*/
         \Conner\Likeable\LikeableServiceProvider::class,
         /*likes comments*/
-        risul\LaravelLikeComment\LikeCommentServiceProvider::class
+        risul\LaravelLikeComment\LikeCommentServiceProvider::class,
+
 
 
     ],
@@ -262,6 +263,7 @@ return [
          * https://github.com/caffeinated/flash
          * */
         'Flash' => Laracasts\Flash\Flash::class,
+
 
 
     ],
