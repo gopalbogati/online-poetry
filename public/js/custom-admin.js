@@ -284,3 +284,6 @@ $('#variantProduct').change(function () {
 $("body :file").filestyle({buttonBefore: true});
 
 $('.select2').select2();
+
+
+

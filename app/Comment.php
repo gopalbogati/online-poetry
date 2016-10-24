@@ -12,6 +12,7 @@ class Comment extends Model
         'website',
         'comment',
         'post_id',
+        'user_id',
 
     ];
 

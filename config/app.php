@@ -188,11 +188,15 @@ return [
         //social lite facebook provider
         Laravel\Socialite\SocialiteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-         /*
-         * Flash
-         * https://github.com/laracasts/flash
-         * */
+        /*
+        * Flash
+        * https://github.com/laracasts/flash
+        * */
         Laracasts\Flash\FlashServiceProvider::class,
+        /*laravel likeable*/
+        \Conner\Likeable\LikeableServiceProvider::class,
+        /*likes comments*/
+        risul\LaravelLikeComment\LikeCommentServiceProvider::class
 
 
     ],

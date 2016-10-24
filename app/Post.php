@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Conner\Likeable\LikeableTrait;
 
 class Post extends Model
 {
+    use LikeableTrait;
+
 
     protected $fillable = [
         'title',
@@ -51,6 +54,7 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+
     /**
      * Get the comments for the blog post.
      */
@@ -58,4 +62,5 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
 }

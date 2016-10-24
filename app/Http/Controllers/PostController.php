@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Role;
 use App\Comment;
 
+
 class PostController extends Controller
 {
 
@@ -201,12 +202,47 @@ class PostController extends Controller
 
     }
 
-    public function single(Post $post, Comment $comment)
+    public function single(Post $post, Comment $comment, User $user)
     {
+        /*  $user=User::all();*/
+
         $categories = Category::all();
         $post = Post::find($post->id);
-        $posts = $post->comment;
-        return view('Posts.single', compact('post', 'posts', 'categories'));
+
+        return view('Posts.single', compact('post', 'categories', 'user'));
     }
 
+  /*  public function postLikePost(Request $request)
+    {
+        $post_id = $request['postId'];
+        $is_like = $request['isLike'] === 'true';
+        $update = false;
+        $post = Post::find($post_id);
+        if (!$post) {
+            return null;
+        }
+        $user = Auth::user();
+        $like = $user->likes()->where('post_id', $post_id)->first();
+        if ($like) {
+            $already_like = $like->like;
+            $update = true;
+            if ($already_like == $is_like) {
+                $like->delete();
+
+                return null;
+            }
+        } else {
+            $like = new Like();
+        }
+        $like->like = $is_like;
+        $like->user_id = $user->id;
+        $like->post_id = $post->id;
+        if ($update) {
+            $like->update();
+        } else {
+            $like->save();
+        }
+
+        return null;
+    }*/
 }

@@ -9,9 +9,9 @@ Route::group(
     Route::post('users/Register', 'UserController@storeUser')->name('user.store');
     Route::group(['middleware' => 'auth'], function () {
 
+        Route::get('delete/comment/{comment}', 'CommentController@commentDelete')->name('comment.delete');
         Route::post('post/comment', 'CommentController@commentStore')->name('comment.store');
         Route::get('create/post', 'PostController@create')->name('postcreate');
-
         Route::post('posts', 'PostController@store')->name('poststore');
         Route::post('post', 'PostController@welcomePostStore')->name('welcomepoststore');
         Route::get('postslist', 'PostController@welcomePostDisplay')->name('welcomepostdisplay');
